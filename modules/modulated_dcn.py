@@ -16,6 +16,10 @@ class ModulatedDeformConv(nn.Module):
     def __init__(self, in_channels, out_channels,
                  kernel_size, stride, padding, dilation=1, deformable_groups=1, no_bias=True):
         super(ModulatedDeformConv, self).__init__()
+
+        if in_channels % deformable_groups != 0:
+            raise ValueError('in_channels {} must be divisible by deformable_groups {}'.format(in_channels, deformable_groups))
+            
         self.in_channels = in_channels
         self.out_channels = out_channels
         self.kernel_size = _pair(kernel_size)
