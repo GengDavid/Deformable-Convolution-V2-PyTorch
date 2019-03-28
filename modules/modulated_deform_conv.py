@@ -21,6 +21,8 @@ class ModulatedDeformConv(nn.Module):
             raise ValueError('in_channels {} must be divisible by groups {}'.format(in_channels, groups))
         if out_channels % groups != 0:
             raise ValueError('out_channels {} must be divisible by groups {}'.format(out_channels, groups))
+        if in_channels % deformable_groups != 0:
+            raise ValueError('in_channels {} must be divisible by deformable_groups {}'.format(in_channels, deformable_groups))
 
         self.in_channels = in_channels
         self.out_channels = out_channels
